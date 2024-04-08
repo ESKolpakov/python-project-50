@@ -13,3 +13,13 @@ build:
 lint:
 		flake8 gendiff
 		isort --check-only --diff gendiff
+
+selfcheck:
+		poetry check
+
+check: selfcheck test lint
+
+build: check
+		poetry build
+
+.PHONY: install test lint selfcheck check build

@@ -1,22 +1,30 @@
 install:
-        poetry install
-
-install-force:
-		python3 -m pip install --user --force-reinstall dist/*.whl
+	poetry install
 
 gendiff:
-		poetry run python -m gendiff.scripts.gendiff
+	poetry run gendiff
 
 build: check
-		poetry build
+	poetry build
+
+package-install:
+	python3 -m pip install --user dist/*.whl
+
+package-reinstall:
+	python3 -m pip install --user dist/*.whl --force-reinstall
+
+test:
+	poetry run pytest
 
 lint:
-		flake8 gendiff
-		isort --check-only --diff gendiff
+	poetry run flake8 gendiff
+
+test-coverage:
+	poetry run pytest --cov=gendiff  --cov-report xml
+
+check: selfcheck test lint
 
 selfcheck:
-		poetry check
+	poetry check
 
-check: selfcheck lint test
-
-.PHONY: install test lint selfcheck check build
+.PHONY: install gendiff build publish package-install package-reinstall lint test test-coverage selfcheck check

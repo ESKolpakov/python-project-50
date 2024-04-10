@@ -5,28 +5,35 @@
 ### GithubActions
 [![Python CI](https://github.com/ESKolpakov/python-project-50/actions/workflows/pyci.yml/badge.svg)](https://github.com/ESKolpakov/python-project-50/actions/workflows/pyci.yml)
 
+[![asciicast](https://asciinema.org/a/e56IWh6mm0km3Zn7dNJM09r4l.svg)](https://asciinema.org/a/e56IWh6mm0km3Zn7dNJM09r4l)
 
-The general usage is (both absolute and relative paths to files are supported):
-
+For testing this project:
+JSON:
 ```bash
->> gendiff [-f file_format] file_path1 file_path2
+gendiff tests/fixtures/file1.json tests/fixtures/file2.json
+{
+- follow: False
+  host: hexlet.io
+- proxy: 123.234.53.22
+- timeout: 50
++ timeout: 20
++ verbose: True
+}
 ```
 
-Difference Generator provides help command as well:
 
 ```bash
 >> gendiff --help
-
 usage: gendiff [-h] [-f FORMAT] first_file second_file
 
 Compares two configuration files and shows a difference.
 
 positional arguments:
-  first_file
-  second_file
+  first_file            first config file
+  second_file           second config file
 
 options:
   -h, --help            show this help message and exit
   -f FORMAT, --format FORMAT
-                        set format of output (default: "stylish")
+                        set format of output
 ```

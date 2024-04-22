@@ -1,20 +1,11 @@
-import json
+from gendiff.format.convert_files import convert_data_to_python
+from gendiff.format.data_parser import get_diff
+from gendiff.format.get_format import get_format
 
 
 def generate_diff(file_path1, file_path2, format='stylish'):
-    with open(file_path1) as f1, open(file_path2) as f2:
-        file1_data = json.load(f1)
-        file2_data = json.load(f2)
-    keys = sorted(file1_data.keys() | file2_data.keys())
-    lines = []
-    for key in keys:
-        if key not in file2_data:
-            lines.append(f"- {key}: {file1_data[key]}")
-        elif key not in file1_data:
-            lines.append(f"+ {key}: {file2_data[key]}")
-        elif file1_data[key] != file2_data[key]:
-            lines.append(f"- {key}: {file1_data[key]}")
-            lines.append(f"+ {key}: {file2_data[key]}")
-        else:
-            lines.append(f"  {key}: {file1_data[key]}")
-    return "{\n" + "\n".join(lines) + "\n}"
+    dict1 = convert_data_to_python(file_path1)
+    dict2 = convert_data_to_python(file_path2)
+    diff = get_diff(dict1, dict2)
+
+    return get_format(diff, format)

@@ -1,21 +1,39 @@
-import pytest
-
+import os
 from gendiff.generator import generate_diff
 
 
-JSON_FILE1 = 'tests/fixtures/file1.json'
-JSON_FILE2 = 'tests/fixtures/file2.json'
-EXPECTED_JSON_RESULT = 'tests/fixtures/expected-json.txt'
+def get_fixture_path(file_name):
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    return os.path.join(current_dir, 'fixtures', file_name)
 
 
-def read_file(file_path):
-    with open(file_path, 'r') as file:
-        return file.read()
-    
+def read(file_path):
+    with open(file_path, 'r') as f:
+        result = f.read()
+    return result
 
-def test_generate_diff_json():
-    expected_result = read_file(EXPECTED_JSON_RESULT)
-    assert generate_diff(
-        JSON_FILE1, JSON_FILE2, format='json'
-        ) == expected_result
+
+def test_finding_different():
+    jsone_path1 = get_fixture_path('file1.json')
+    jsone_path2 = get_fixture_path('file2.json')
+    yml_path1 = get_fixture_path('file1.yml')
+    yml_path2 = get_fixture_path('file2.yml')
+
+    result_stylish = read(get_fixture_path('expected-stylish.txt'))
+    result_plain = read(get_fixture_path('expected-yaml.txt'))
+    result_json = read(get_fixture_path('expected-json.txt'))
+
+    stylish_result_with_json = generate_diff(jsone_path1, jsone_path2)
+    stylish_result_with_yml = generate_diff(yml_path1, yml_path2)
+    plain_result_with_json = generate_diff(jsone_path1, jsone_path2, 'plain')
+    plain_result_with_yml = generate_diff(yml_path1, yml_path2, 'plain')
+    json_result_with_json = generate_diff(jsone_path1, jsone_path2, 'json')
+    json_result_with_yml = generate_diff(yml_path1, yml_path2, 'json')
+
+    assert stylish_result_with_json == result_stylish
+    assert stylish_result_with_yml == result_stylish
+    assert plain_result_with_json == result_plain
+    assert plain_result_with_yml == result_plain
+    assert json_result_with_json == result_json
+    assert json_result_with_yml == result_json
     

@@ -20,7 +20,7 @@ def test_finding_different():
     yml_path2 = get_fixture_path('file2.yml')
 
     result_stylish = read(get_fixture_path('expected-stylish.txt'))
-    result_plain = read(get_fixture_path('expected-yaml.txt'))
+    result_plain = read(get_fixture_path('expected-plain.txt'))
     result_json = read(get_fixture_path('expected-json.txt'))
 
     stylish_result_with_json = generate_diff(jsone_path1, jsone_path2)

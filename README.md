@@ -5,6 +5,27 @@
 
 [![asciicast](https://asciinema.org/a/e56IWh6mm0km3Zn7dNJM09r4l.svg)](https://asciinema.org/a/e56IWh6mm0km3Zn7dNJM09r4l)
 
+
+Diff two YAML files and plain format:
+```bash
+gendiff tests/fixtures/file1.yml tests/fixtures/file2.yml
+{
+  - follow: false
+    host: hexlet.io
+  - proxy: 123.234.53.22
+  - timeout: 50
+  + timeout: 20
+  + verbose: true
+}
+gendiff -f plain tests/fixtures/file1.yml tests/fixtures/file2.yml
+Property 'follow' was removed
+Property 'proxy' was removed
+Property 'timeout' was updated. From 50 to 20
+Property 'verbose' was added with value: true
+```
+[![asciicast](https://asciinema.org/a/XYwkzcoe0MaMCUYfN5mB0zAxk.svg)](https://asciinema.org/a/XYwkzcoe0MaMCUYfN5mB0zAxk)
+
+
 For testing this project:
 JSON:
 ```bash

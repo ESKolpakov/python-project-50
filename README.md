@@ -3,46 +3,8 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/ba974e28575e2280e628/maintainability)](https://codeclimate.com/github/ESKolpakov/python-project-50/maintainability)
 [![Python CI](https://github.com/ESKolpakov/python-project-50/actions/workflows/pyci.yml/badge.svg)](https://github.com/ESKolpakov/python-project-50/actions/workflows/pyci.yml)
 
-The last asciinema:
-[![asciicast](https://asciinema.org/a/YufAY8VnAzYIItVWvd3b0VwFN.svg)](https://asciinema.org/a/YufAY8VnAzYIItVWvd3b0VwFN)
-
-Penultimate asciinema:
-Diff two YAML files and plain format:
-```bash
-gendiff tests/fixtures/file1.yml tests/fixtures/file2.yml
-{
-  - follow: false
-    host: hexlet.io
-  - proxy: 123.234.53.22
-  - timeout: 50
-  + timeout: 20
-  + verbose: true
-}
-gendiff -f plain tests/fixtures/file1.yml tests/fixtures/file2.yml
-Property 'follow' was removed
-Property 'proxy' was removed
-Property 'timeout' was updated. From 50 to 20
-Property 'verbose' was added with value: true
-```
-[![asciicast](https://asciinema.org/a/XYwkzcoe0MaMCUYfN5mB0zAxk.svg)](https://asciinema.org/a/XYwkzcoe0MaMCUYfN5mB0zAxk)
-
-
-[![asciicast](https://asciinema.org/a/e56IWh6mm0km3Zn7dNJM09r4l.svg)](https://asciinema.org/a/e56IWh6mm0km3Zn7dNJM09r4l)
-
-
-For testing this project:
-JSON:
-```bash
-gendiff tests/fixtures/file1.json tests/fixtures/file2.json
-{
-- follow: False
-  host: hexlet.io
-- proxy: 123.234.53.22
-- timeout: 50
-+ timeout: 20
-+ verbose: True
-}
-```
+Asciinema:
+[![asciicast](https://asciinema.org/a/ZPbygaTaHtcHVCIjTAwEDWfyu.svg)](https://asciinema.org/a/ZPbygaTaHtcHVCIjTAwEDWfyu)
 
 
 ```bash
@@ -59,4 +21,10 @@ options:
   -h, --help            show this help message and exit
   -f FORMAT, --format FORMAT
                         set format of output
+```
+```bash
+>> gendiff tests/fixtures/file1.yml tests/fixtures/file2.yml
+>> gendiff -f stylish tests/fixtures/file1.json tests/fixtures/file2.json
+>> gendiff -f plain tests/fixtures/file1.json tests/fixtures/file2.json
+>> gendiff -f json tests/fixtures/file1.json tests/fixtures/file2.json
 ```

@@ -2,40 +2,27 @@ from gendiff.format.bool_to_str import bool_to_str
 from gendiff.format.data_parser import COMMON, ADD, REMOVE
 
 
-diffes = (COMMON, ADD, REMOVE)
+def format_key_value(key, value, indent, is_nested=False):
+    if not is_nested:
+        return f"{indent}{key}: {value}"
+    return f"{indent}{key}: {{\n{value}\n{indent}}}"
 
 
-def get_full_str(predicate, key, value):
-    return f'{predicate}{key}: {value}'
-
-
-def get_key_str(predicate, key):
-    return f'{predicate}{key}: ' + '{'
-
-
-def get_end_str(predicate):
-    return f'{predicate}' + '}'
-
-
-def stylish(data, replacer=' ', spases_count=4):
-    result = ['{']
-    def dict_to_str(data, level):
-        predicate = replacer * (spases_count * level - len(ADD))
-        predicate2 = replacer * spases_count * level
-        predicate3 = replacer * spases_count * (level - 1)
-        for k, v in data.items():
-            v = bool_to_str(v)
-            if not isinstance(v, dict):
-                if k.startswith(diffes):
-                    result.append(get_full_str(predicate, k, v))
-                else:
-                    result.append(get_full_str(predicate2, k, v))
-            elif isinstance(v, dict):
-                if k.startswith(diffes):
-                    result.append(get_key_str(predicate, k))
-                else:
-                    result.append(get_key_str(predicate2, k))
-                dict_to_str(v, level + 1)
-        result.append(get_end_str(predicate3))
-        return '\n'.join(result)
-    return dict_to_str(data, 1)
+def stylish(data, replacer=' ', spaces_count=4):
+    def dict_to_str(data, depth):
+        lines = []
+        indent = replacer * spaces_count * depth
+        inner_indent = replacer * spaces_count * (depth + 1)
+        for key, value in data.items():
+            if isinstance(value, dict):
+                nested = dict_to_str(value, depth + 1)
+                line = format_key_value(key, nested, inner_indent, is_nested=True)
+            else:
+                formatted_value = bool_to_str(value)
+                line = format_key_value(key, formatted_value, inner_indent)
+            lines.append(line)
+        result = '\n'.join(lines)
+        if depth == 1:
+            return f"{{\n{result}\n}}"
+        return result
+    return dict_to_str(data, 0)

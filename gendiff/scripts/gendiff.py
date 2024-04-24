@@ -2,7 +2,7 @@
 
 from gendiff.args_parser import parser_arg
 from gendiff.generator import generate_diff
-from gendiff.format.convert_files import convert_data_to_python
+
 
 
 def main():

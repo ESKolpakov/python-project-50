@@ -32,8 +32,10 @@ def get_diff(dict1, dict2):
             if dict1[key] == dict2[key]:
                 result[get_common(format_keys)] = dict1[key]
             else:
-                if isinstance(dict1[key], dict) and isinstance(dict2[key], dict):
-                    result[get_common(format_keys)] = get_diff(dict1[key], dict2[key])
+                if (isinstance(dict1[key], dict)
+                        and isinstance(dict2[key], dict)):
+                    result[get_common(format_keys)] = \
+                        get_diff(dict1[key], dict2[key])
                 else:
                     result[get_remove(format_keys)] = dict1[key]
                     result[get_add(format_keys)] = dict2[key]

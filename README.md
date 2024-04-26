@@ -22,6 +22,7 @@ options:
   -f FORMAT, --format FORMAT
                         set format of output
 ```
+To compare the two test files attached to the project, enter one of these commands:
 ```bash
 >> gendiff tests/fixtures/file1.yml tests/fixtures/file2.yml
 >> gendiff -f stylish tests/fixtures/file1.json tests/fixtures/file2.json

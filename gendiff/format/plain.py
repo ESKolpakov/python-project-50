@@ -8,6 +8,7 @@ def get_plain_formated_value(value):
     elif isinstance(value, str):
         value = f"'{value}'"
     value = bool_to_str(value)
+
     return value
 
 
@@ -20,9 +21,11 @@ def message_format(path, value, next_value):
     value = get_plain_formated_value(value)
     next_value = get_plain_formated_value(next_value)
     path = get_plain_formated_path(path)
+
     added = f"Property '{path}' was added with value: {value}"
     removed = f"Property '{path}' was removed"
     updated = f"Property '{path}' was updated. From {value} to {next_value}"
+
     return {'added': added, 'removed': removed, 'updated': updated}
 
 
@@ -40,6 +43,7 @@ def get_updated(message):
 
 def plain(data):
     result = []
+
     def dict_to_str(data, start_path=[]):
         for key, value in data.items():
             orig_key = key[len(ADD):]

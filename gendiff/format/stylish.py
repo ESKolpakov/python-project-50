@@ -38,7 +38,5 @@ def stylish(data, replacer=' ', spases_count=4):
                     result.append(get_key_str(predicate2, k))
                 dict_to_str(v, level + 1)
         result.append(get_end_str(predicate3))
-
         return '\n'.join(result)
-
     return dict_to_str(data, 1)

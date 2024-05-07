@@ -1,5 +1,5 @@
-from gendiff.format.bool_to_str import bool_to_str
-from gendiff.format.data_parser import COMMON, ADD, REMOVE
+from gendiff.helpers.bool_to_str import bool_to_str
+from gendiff.helpers.data_parser import COMMON, ADD, REMOVE
 
 
 diffes = (COMMON, ADD, REMOVE)

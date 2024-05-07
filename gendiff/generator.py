@@ -1,6 +1,6 @@
-from gendiff.format.convert_files import convert_data_to_python
-from gendiff.format.data_parser import get_diff
-from gendiff.format.get_format import get_format
+from gendiff.helpers.convert_files import convert_data_to_python
+from gendiff.helpers.data_parser import get_diff
+from gendiff.helpers.get_format import get_format
 
 
 def generate_diff(file_path1, file_path2, format='stylish'):

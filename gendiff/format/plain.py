@@ -1,5 +1,5 @@
 from gendiff.helpers.bool_to_str import bool_to_str
-from gendiff.helpers.data_parser import COMMON, ADD, REMOVE
+from gendiff.helpers.diff_builder import COMMON, ADD, REMOVE
 
 
 def get_plain_formated_value(value):

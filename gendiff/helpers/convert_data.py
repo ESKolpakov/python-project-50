@@ -17,7 +17,8 @@ def read_data_from_url(url):
 
 
 def convert_data(file_path_or_url, data_format):
-    if file_path_or_url.startswith('http://') or file_path_or_url.startswith('https://'):
+    if file_path_or_url.startswith('http://') \
+            or file_path_or_url.startswith('https://'):
         data = read_data_from_url(file_path_or_url)
     else:
         data = read_file(file_path_or_url)
